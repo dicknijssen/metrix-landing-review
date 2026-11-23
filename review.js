@@ -27,10 +27,12 @@
     byKey.set(k, el);
   });
   const section = (el) => {
-    const s = el.closest("section,header,footer");
+    // The page section (not the section's own title header), named by its number and original title.
+    const s = el.closest("section") || el.closest("header,footer");
     if (!s) return "";
-    const h = s.querySelector("h1,h2");
-    return (s.id ? "#" + s.id + " · " : "") + (h ? norm(h.innerText).slice(0, 50) : s.tagName.toLowerCase());
+    const eye = s.querySelector(".s-eye"), h = s.querySelector("h1,h2");
+    const name = eye ? norm(eye.dataset.orig || eye.innerText) : s.id === "inicio" ? "Inicio" : s.tagName === "HEADER" ? "Menú" : s.tagName === "FOOTER" ? "Pie de página" : s.id || "";
+    return name + (h ? " · " + (h.dataset.orig || norm(h.innerText)).slice(0, 60) : "");
   };
 
   const edits = new Map();
