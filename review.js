@@ -1,6 +1,6 @@
 // Review mode for the Metrix landing (owner, 2026-11-23): anyone with the link can change any text, no sign-in. Every change
 // is saved to the owner's Google Sheet through a small Apps Script web app (SHEET_API), and also kept in this browser as a
-// backup. Everyone who opens the link sees the changes already saved. The WhatsApp button stays as a fallback.
+// backup. Everyone who opens the link sees the changes already saved.
 (() => {
   const API = window.SHEET_API || "";
   const PICK = "h1,h2,h3,h4,h5,h6,p,li,figcaption,blockquote,dt,dd,label,button,a,td,th,small,span,strong,em,b,div";
@@ -73,7 +73,7 @@
       return true;
     } catch (_) {
       online = false;
-      status('Sin conexión: tus cambios quedan en este celular y se guardan al volver la señal. También puedes tocar <strong>Enviar por WhatsApp</strong>.');
+      status('Sin conexión: tus cambios quedan en este celular y se guardan al volver la señal.');
       return false;
     }
   };
@@ -122,11 +122,6 @@
   });
   const allText = () => [...edits.entries()].sort((a, b) => a[0].localeCompare(b[0]))
     .map(([k, e]) => `[${k}] ${e.section}\nANTES: ${e.original}\nDESPUÉS: ${e.text}`).join("\n\n") + (note ? `\n\nCOMENTARIOS:\n${note}` : "");
-  $("ed-wa").onclick = () => {
-    if (!edits.size && !note.trim()) { alert("Todavía no hay cambios. Toca cualquier texto para cambiarlo, o escribe en Ver cambios → Comentarios generales."); return; }
-    const u = "https://wa.me/?text=" + encodeURIComponent("Cambios a la landing de Metrix (" + edits.size + ")\n\n" + allText());
-    window.open(u, "_blank") || (location.href = u);
-  };
   $("ed-copy").onclick = () => {
     const txt = allText();
     const done = () => { $("ed-copy").textContent = "Copiado"; setTimeout(() => ($("ed-copy").textContent = "Copiar todos los cambios"), 1500); };
@@ -145,7 +140,7 @@
     note = localStorage.getItem("ed-note") || ""; $("ed-note").value = note;
   } catch (_) {}
   setEditing(true); paint();
-  if (!API) { status("Modo edición sin conexión: tus cambios quedan en este navegador. Toca <strong>Enviar por WhatsApp</strong> al terminar."); return; }
+  if (!API) { status("Modo edición sin conexión: tus cambios quedan en este navegador."); return; }
   okMsg();
   const load = async () => {
     try {

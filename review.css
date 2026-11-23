@@ -15,8 +15,6 @@ body { padding-bottom: calc(64px + env(safe-area-inset-bottom, 0px)); }
 .ed-bar button:hover { background: rgb(255 255 255 / 0.1); }
 .ed-bar button.ed-primary { background: #FFD84D; color: var(--ed-bar); border-color: #FFD84D; }
 .ed-bar button:focus-visible, .ed-panel button:focus-visible { outline: 2px solid #FFD84D; outline-offset: 2px; }
-.ed-bar button.ed-wa { display: inline-flex; align-items: center; gap: 7px; background: #25D366; border-color: #25D366; color: #fff; }
-.ed-bar button.ed-wa:hover { background: #1EBE5B; }
 .ed-count { display: inline-grid; place-items: center; min-width: 22px; height: 22px; padding: 0 6px; border-radius: 999px; background: var(--ed-red); color: #fff; font-size: 12px; font-weight: 700; margin-left: 6px; }
 .ed-panel { position: fixed; z-index: 9998; right: max(16px, env(safe-area-inset-right, 0px)); bottom: calc(74px + env(safe-area-inset-bottom, 0px)); width: min(460px, calc(100vw - 32px)); max-height: min(70vh, 640px); overflow: auto;
   background: var(--ed-panel); color: var(--ed-text); border-radius: 14px; box-shadow: 0 18px 50px rgb(20 24 50 / 0.3); font: 15px/1.45 "Source Sans 3", system-ui, sans-serif; padding: 16px; }
